@@ -1,36 +1,41 @@
 from random import randint
 from panda3d.core import NodePath, CardMaker
 
-class EnemySpawner:
-    # Creates enemies at certain intervals.
-    pass
+from .tools import sheet_card
 
 
-
-class TestEnemySpawner:
-    # Creates enemies at certain intervals.
-    def __init__(self):
-        self.enemy = NodePath("enemy")
-        enemy_card = self.enemy.attach_new_node(CardMaker("enemy").generate())
-        enemy_card.set_p(-90)
+class Enemy:
+    def __init__(self, pos=(0,0,0), image="enemy"):
+        self.hp =  1
+        self.root = sheet_card("enemy").copy_to(render)
+        self.root.set_pos(pos)
+        self.lifetime = 0
         base.task_mgr.add(self.update)
-        self.cooldown = 2
 
+    def movement(self):
+        pass
+
+    def update(self, task):
+        self.lifetime += game.clock.dt
+        self.root.set_y(self.root, -5*game.clock.dt)
+        if self.root.get_y() <= -20 or game.hell.is_hit(self.root):
+            self.root.detach_node()
+            return task.done
+        self.movement()
+        return task.cont
+
+
+class EnemySpawner:
+    def __init__(self, level=0):
+        base.task_mgr.add(self.update)
+        self.cooling = 2
+        self.cooldown = self.cooling
         self.enemies = []
 
     def update(self, task):
         self.cooldown += game.clock.dt
-        if self.cooldown > 2:
-            self.cooldown -= 2
-            enemy = self.enemy.copy_to(render)
-            enemy.set_y(19)
-            enemy.set_x(randint(-10,10))
-            self.enemies.append(enemy)
-
-        for enemy in self.enemies:
-            enemy.set_y(enemy, -5*game.clock.dt)
-            if enemy.get_y() <= -20 or game.hell.is_hit(enemy):
-                self.enemies.remove(enemy)
-                enemy.detach_node()
+        if self.cooldown > self.cooling:
+            self.cooldown -= self.cooling
+            Enemy(pos=(randint(-10,10), 19, 0))
         return task.cont
 

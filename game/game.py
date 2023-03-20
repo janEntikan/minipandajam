@@ -5,7 +5,6 @@ from game.hell import Hell
 from game.clock import Clock
 from game.player import Player
 from game.enemies import EnemySpawner
-from game.enemies import TestEnemySpawner
 from game.background import BackgroundScroller
 
 
@@ -21,7 +20,6 @@ class Game:
         self.hell = Hell()
         self.player = Player()
         self.enemy_spawner = EnemySpawner()
-        self.enemy_spawner = TestEnemySpawner()
         self.background = BackgroundScroller()
 
 
