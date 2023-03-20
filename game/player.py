@@ -36,3 +36,4 @@ class Player:
             game.hell.spawn_bullet(self.root.get_pos())
 
         return task.cont
+
