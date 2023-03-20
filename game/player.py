@@ -3,6 +3,11 @@ from panda3d.core import Vec3
 
 
 class Player:
+
+    FPS = 128
+    const = 0.03
+
+
     def __init__(self):
         self.root = render.attach_new_node("player")
         card = self.root.attach_new_node(CardMaker("player").generate())
@@ -19,12 +24,12 @@ class Player:
     def update(self, task):
         buttons = base.device_listener.read_context("player")
         motion = Vec3(buttons["movement"].x, buttons["movement"].y, 0)
-        self.velocity += motion*128*base.clock.dt
-        total_vel = self.velocity*base.clock.dt
+        self.velocity += motion * self.FPS * base.clock.dt
+        total_vel = self.velocity * base.clock.dt
         game.clock.update_slowdown(total_vel.length()*3)
         self.root.set_pos(self.root, total_vel)
-        self.velocity *= base.clock.dt**0.03
-
+        self.velocity *= base.clock.dt ** self.const
+ 
         self.cooldown += game.clock.dt
         if self.cooldown >= self.cooling:
             self.cooldown -= self.cooling
