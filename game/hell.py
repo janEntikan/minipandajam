@@ -26,6 +26,7 @@ class Hell:
         bullet.set_pos(pos)
         self.bullets_on_screen.append(bullet)
 
-
+    def is_hit(self, who):
+        return False
 
 
