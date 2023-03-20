@@ -12,7 +12,7 @@ class Game:
     def __init__(self):
         # Access with base.device_listener.read_context("your context")
         add_device_listener(assigner=SinglePlayerAssigner())
-
+        base.win.set_clear_color((0.3,0.3,0.3,1))
         base.cam.set_z(64)
         base.cam.look_at(0,0,0)
 
