@@ -39,7 +39,7 @@ class Hell:
     
     def bullet_acc(self, acc):
         # accelerates or decelerates bullet based on the value of acc
-        self.velocity += acc * base.clock.dt
+        self.velocity += acc * game.clock.dt
         return
 
     def bullet_physics(self):
