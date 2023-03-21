@@ -2,7 +2,7 @@ from panda3d.core import NodePath, CardMaker
 from panda3d.core import Vec3
 
 # importing player class as we will be using some of its functionalities
-from player import Player
+from .player import Player
 
 # makes bullets and checks for collisions
 class Hell:
