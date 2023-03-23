@@ -18,7 +18,7 @@ class Enemy:
     def update(self, task):
         self.lifetime += game.clock.dt
         self.root.set_y(self.root, -5*game.clock.dt)
-        if self.root.get_y() <= -20 or game.hell.is_hit(self.root):
+        if self.root.get_y() <= -20 or game.hell.is_colliding(self.root):
             self.root.detach_node()
             return task.done
         self.movement()
@@ -36,6 +36,6 @@ class EnemySpawner:
         self.cooldown += game.clock.dt
         if self.cooldown > self.cooling:
             self.cooldown -= self.cooling
-            Enemy(pos=(randint(-10,10), 19, 0))
+            Enemy(pos=(randint(-20,20), 19, 0))
         return task.cont
 

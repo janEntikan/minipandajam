@@ -29,11 +29,10 @@ class Player:
         game.clock.update_slowdown(total_vel.length()*3)
         self.root.set_pos(self.root, total_vel)
         self.velocity *= base.clock.dt ** self.const
- 
+
         self.cooldown += game.clock.dt
         if self.cooldown >= self.cooling:
             self.cooldown -= self.cooling
-            game.hell.spawn_bullet(self.root.get_pos())
-
+            game.hell.make_particle(self.root.get_pos(), Vec3(0,10,0))
         return task.cont
 

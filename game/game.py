@@ -1,7 +1,7 @@
 from keybindings.device_listener import add_device_listener
 from keybindings.device_listener import SinglePlayerAssigner
 
-from game.hell import Hell
+from game.hell import Particles
 from game.clock import Clock
 from game.player import Player
 from game.enemies import EnemySpawner
@@ -17,7 +17,7 @@ class Game:
         base.cam.look_at(0,0,0)
 
         self.clock = Clock()
-        self.hell = Hell()
+        self.hell = Particles(loader.load_texture("assets/images/enemy.png"))
         self.player = Player()
         self.enemy_spawner = EnemySpawner()
         self.background = BackgroundScroller()
